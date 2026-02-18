@@ -1,3 +1,1252 @@
-<h1>김시연</h1>
+<!DOCTYPE html>
+<html lang="ko">
 
-<p>GAIDA-2nd</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============================================
+    📌 [수정] 브라우저 탭에 표시될 제목
+    예: "홍길동 | Frontend Developer"
+  ============================================= -->
+    <title>Your Name — Developer Portfolio</title>
+
+    <!-- 구글 폰트 로드 (변경 불필요) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+       🎨 [수정 가능] 컬러 테마 설정
+       --accent: 메인 포인트 색상 (현재 퍼플)
+       색상 변경 시 --accent 값만 바꾸면 전체 적용됩니다
+       예: #60a5fa (블루), #f97316 (오렌지), #34d399 (민트)
+    ============================================= */
+        
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+         :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-card: #161618;
+            --bg-card-hover: #1c1c1f;
+            --accent: #b48cff;
+            /* 🎨 메인 포인트 색상 */
+            --accent-dim: rgba(180, 140, 255, 0.08);
+            /* 🎨 accent 투명 버전 (배경용) */
+            --accent-mid: rgba(180, 140, 255, 0.15);
+            /* 🎨 accent 중간 투명도 */
+            --text-primary: #f0f0f0;
+            --text-secondary: #8a8a8e;
+            --text-tertiary: #55555a;
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'Noto Sans KR', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--text-tertiary) transparent;
+        }
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+         ::selection {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+        /* 배경 노이즈 질감 (변경 불필요) */
+        
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+        /* 마우스 글로우 효과 */
+        
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(180, 140, 255, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+        /* ── 네비게이션 ── */
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 11, 0.7);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        nav.scrolled {
+            padding: 1rem 3rem;
+        }
+        
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .nav-logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 200;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+        }
+        /* ── 히어로 ── */
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 3rem 4rem;
+            position: relative;
+        }
+        
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.3s forwards;
+        }
+        
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.5s forwards;
+        }
+        
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .hero-title .highlight {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--accent);
+            transition: all 0.4s;
+        }
+        
+        .hero-title .highlight:hover {
+            color: var(--accent);
+            -webkit-text-stroke: 1.5px transparent;
+        }
+        
+        .hero-desc {
+            max-width: 520px;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.7s forwards;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.9s forwards;
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(180, 140, 255, 0.2);
+        }
+        
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            background: transparent;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            border: 1px solid var(--border-hover);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            opacity: 0;
+            animation: fadeIn 1s 1.5s forwards;
+        }
+        
+        .scroll-line {
+            width: 40px;
+            height: 1px;
+            background: var(--text-tertiary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            animation: scrollLine 2s infinite;
+        }
+        /* ── 공통 섹션 ── */
+        
+        section {
+            padding: 7rem 3rem;
+            position: relative;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        /* ── About ── */
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .about-text p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+        
+        .about-text strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .stat-card {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .stat-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+        /* ── Skills ── */
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .skill-group {
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        
+        .skill-group::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-dim), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .skill-group:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        
+        .skill-group:hover::after {
+            opacity: 1;
+        }
+        
+        .skill-group-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border: 1px solid rgba(180, 140, 255, 0.1);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-group-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-group-sub {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-tag {
+            padding: 0.35rem 0.85rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .skill-tag:hover {
+            color: var(--accent);
+            border-color: rgba(180, 140, 255, 0.2);
+            background: var(--accent-dim);
+        }
+        /* ── Projects ── */
+        
+        .projects-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-visual {
+            aspect-ratio: 16/10;
+            background: var(--bg-secondary);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .project-visual-inner {
+            width: 80%;
+            height: 70%;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .project-card:hover .project-visual-inner {
+            transform: scale(1.03);
+        }
+        
+        .project-visual-bar {
+            height: 28px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 5px;
+        }
+        
+        .project-visual-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--text-tertiary);
+        }
+        
+        .project-visual-dot:nth-child(1) {
+            background: #ff5f57;
+        }
+        
+        .project-visual-dot:nth-child(2) {
+            background: #febc2e;
+        }
+        
+        .project-visual-dot:nth-child(3) {
+            background: #28c840;
+        }
+        
+        .project-visual-code {
+            padding: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-tertiary);
+            line-height: 1.8;
+        }
+        
+        .code-keyword {
+            color: #c792ea;
+        }
+        
+        .code-func {
+            color: #82aaff;
+        }
+        
+        .code-string {
+            color: #c3e88d;
+        }
+        
+        .code-comment {
+            color: #546e7a;
+        }
+        
+        .project-info {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .project-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .project-name {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-tech span {
+            padding: 0.3rem 0.7rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: gap 0.3s;
+        }
+        
+        .project-link:hover {
+            gap: 0.8rem;
+        }
+        
+        .project-link svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s;
+        }
+        
+        .project-link:hover svg {
+            transform: translateX(2px);
+        }
+        /* ── Footer ── */
+        
+        footer {
+            padding: 4rem 3rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-left {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        /* ── 애니메이션 (변경 불필요) ── */
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes scrollLine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ── 반응형 (변경 불필요) ── */
+        
+        @media (max-width: 1024px) {
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            section {
+                padding: 5rem 1.5rem;
+            }
+            .hero {
+                padding: 7rem 1.5rem 4rem;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                flex-direction: column;
+                background: var(--bg-secondary);
+                border-left: 1px solid var(--border);
+                padding: 6rem 2rem;
+                gap: 2rem;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .hero-cta {
+                flex-direction: column;
+            }
+            .hero-cta .btn-primary,
+            .hero-cta .btn-outline {
+                width: fit-content;
+            }
+            footer {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            .footer-links {
+                justify-content: center;
+            }
+            .hero-scroll {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- ============================================
+    📌 [수정] 상단 네비게이션
+    - nav-logo: 좌측 상단 로고 텍스트 → 본인 이름/이니셜로 변경
+    - nav-links: 메뉴 항목 (섹션 추가/삭제 시 여기도 수정)
+  ============================================= -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">DEV<span>.</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <!-- 📌 [선택] 섹션 추가 시 여기에 링크 추가
+           예: <li><a href="#contact" onclick="closeMenu()">Contact</a></li> -->
+        </ul>
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    </nav>
+
+
+    <!-- ============================================
+    📌 [수정] 히어로 섹션 — 첫 화면 메인 영역
+    - hero-label: 상단 작은 텍스트
+    - hero-title: 큰 제목 (3줄), highlight = 포인트 색상 텍스트
+    - hero-desc: 한 줄 자기소개
+    - hero-cta: 버튼 2개
+  ============================================= -->
+    <section class="hero">
+        <!-- 📌 [수정] 상단 라벨 -->
+        <p class="hero-label">// Portfolio 2026</p>
+
+        <!-- 📌 [수정] 메인 타이틀 3줄. highlight 클래스 = 포인트 색상 테두리 글자 -->
+        <h1 class="hero-title">
+            <span class="line">Creative</span>
+            <span class="line"><span class="highlight">Developer</span> &</span>
+            <span class="line">Problem Solver</span>
+        </h1>
+
+        <!-- 📌 [수정] 간단한 자기소개 -->
+        <p class="hero-desc">
+            사용자 경험을 중심으로 생각하고, 깔끔한 코드로 아이디어를 현실로 만드는 개발자입니다. 함께 멋진 것을 만들어 봅시다.
+        </p>
+
+        <div class="hero-cta">
+            <a href="#projects" class="btn-primary">
+        프로젝트 보기
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+            <!-- 📌 [수정] GitHub 링크 → 본인 GitHub 주소 -->
+            <a href="https://github.com/sikumdev" target="_blank" class="btn-outline">
+        GitHub
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            Scroll to explore
+        </div>
+    </section>
+
+
+    <!-- ============================================
+    📌 [수정] About 섹션 — 자기소개
+    - about-text: 소개 글 (p 태그로 문단 추가/삭제)
+    - about-stats: 숫자 카드 4개
+  ============================================= -->
+    <section id="about">
+        <div class="section-header reveal">
+            <span class="section-number">01</span>
+            <h2 class="section-title">About</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="about-grid">
+            <!-- 📌 [수정] 자기소개 글 — 본인 경험에 맞게 수정하세요 -->
+            <div class="about-text reveal">
+                <p>
+                    안녕하세요, <strong>주니어 웹 개발자</strong>를 목표로 준비 중인 취업 준비생입니다. 문제를 분석하고 코드로 해결하는 과정에서 가장 큰 보람을 느끼며, 사용자 관점에서 동작하는 서비스를 만드는 데 집중하고 있습니다.
+                </p>
+                <p>
+                    부트캠프와 개인 학습을 통해 <strong>프론트엔드부터 백엔드까지</strong> 웹 개발의 전반적인 흐름을 경험했습니다. 팀 프로젝트에서 협업 도구 활용과 코드 리뷰 문화를 익혔고,
+                    <strong>Git 기반 워크플로우</strong>에 익숙합니다.
+                </p>
+                <p>
+                    빠르게 학습하고 적용하는 것이 강점이며, 꾸준한 기록과 회고를 통해 매일 성장하고 있습니다.
+                </p>
+                <!-- 📌 [선택] 문단 추가/삭제 자유롭게 가능합니다 -->
+            </div>
+
+            <!-- 📌 [수정] 숫자 카드들 — 본인 상황에 맞게 숫자와 라벨 수정
+           카드 추가: stat-card div 복사 / 삭제: stat-card div 제거 -->
+            <div class="about-stats reveal">
+                <div class="stat-card">
+                    <div class="stat-number">6+</div>
+                    <!-- 📌 학습 기간 (개월 수) -->
+                    <div class="stat-label">Months Learning</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <!-- 📌 완료한 프로젝트 수 -->
+                    <div class="stat-label">Projects Done</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7+</div>
+                    <!-- 📌 사용 가능한 기술 수 -->
+                    <div class="stat-label">Tech Stacks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4+</div>
+                    <!-- 📌 자격증/수료증 수 -->
+                    <div class="stat-label">Certificates</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+    📌 [수정] Skills 섹션 — 기술 스택
+
+    ✏️ 수정 방법:
+    1. 기술 추가 → skill-tags 안에 <span class="skill-tag">기술명</span> 추가
+    2. 기술 삭제 → 해당 skill-tag span 삭제
+    3. 카테고리 추가 → skill-group div 전체 복사 후 내용 수정
+    4. 카테고리 삭제 → skill-group div 전체 삭제
+  ============================================= -->
+    <section id="skills">
+        <div class="section-header reveal">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Skills</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="skills-container">
+
+            <!-- 📌 [수정] Frontend 기술 -->
+            <div class="skill-group reveal">
+                <div class="skill-group-icon">⚡</div>
+                <h3 class="skill-group-title">Frontend</h3>
+                <p class="skill-group-sub">Client-side Development</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <!-- 📌 추가: <span class="skill-tag">Vue.js</span> -->
+                </div>
+            </div>
+
+            <!-- 📌 [수정] Backend 기술 -->
+            <div class="skill-group reveal">
+                <div class="skill-group-icon">🔧</div>
+                <h3 class="skill-group-title">Backend</h3>
+                <p class="skill-group-sub">Server-side Development</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <!-- 📌 추가: <span class="skill-tag">MongoDB</span> -->
+                </div>
+            </div>
+
+            <!-- 📌 [수정] DevOps & 도구 -->
+            <div class="skill-group reveal">
+                <div class="skill-group-icon">🚀</div>
+                <h3 class="skill-group-title">DevOps & Tools</h3>
+                <p class="skill-group-sub">Deployment & Workflow</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">VS Code</span>
+                    <!-- 📌 추가: <span class="skill-tag">Docker</span> -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ============================================
+    📌 [수정] Projects 섹션 — 프로젝트 목록
+
+    ✏️ 수정 방법:
+    1. 프로젝트 추가 → "프로젝트 N" 주석이 있는 project-card div 전체 복사 → 내용 수정
+    2. 프로젝트 삭제 → project-card div 전체 삭제
+    3. 각 카드에서 수정할 부분:
+       - project-label  → 프로젝트 종류 (팀/개인/사이드 등)
+       - project-name   → 프로젝트 이름
+       - project-desc   → 설명 (2~3줄)
+       - project-tech   → 사용한 기술 태그
+       - project-link   → GitHub 또는 배포 URL
+       - project-visual-code → 왼쪽 코드 미리보기 (꾸미기용, 안 바꿔도 됨)
+  ============================================= -->
+    <section id="projects">
+        <div class="section-header reveal">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Projects</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">
+
+            <!-- ===== 프로젝트 1 ===== -->
+            <div class="project-card reveal">
+                <div class="project-visual">
+                    <div class="project-visual-inner">
+                        <div class="project-visual-bar">
+                            <span class="project-visual-dot"></span>
+                            <span class="project-visual-dot"></span>
+                            <span class="project-visual-dot"></span>
+                        </div>
+                        <!-- 꾸미기용 코드 미리보기 (수정 안 해도 됨) -->
+                        <div class="project-visual-code">
+                            <span class="code-comment">// Project One</span><br>
+                            <span class="code-keyword">const</span> <span class="code-func">app</span> = <span class="code-func">createApp</span>({<br> &nbsp;&nbsp;data: <span class="code-func">reactive</span>([]),<br> &nbsp;&nbsp;api: <span class="code-keyword">await</span>                            <span class="code-func">fetchAPI</span>(<span class="code-string">'/data'</span>),<br> &nbsp;&nbsp;auth: <span class="code-func">useAuth</span>()<br> });
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-label">팀 프로젝트</span>
+                    <!-- 📌 종류 -->
+                    <h3 class="project-name">프로젝트 이름을 입력하세요</h3>
+                    <!-- 📌 이름 -->
+                    <p class="project-desc">
+                        <!-- 📌 설명 -->
+                        프로젝트에 대한 간단한 설명을 작성하세요. 어떤 문제를 해결했는지, 본인의 역할은 무엇이었는지 2~3줄로 요약하면 좋습니다.
+                    </p>
+                    <div class="project-tech">
+                        <!-- 📌 기술 태그 -->
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <!-- 📌 프로젝트 링크 (GitHub URL 또는 배포 URL) -->
+                    <a href="https://github.com/여기에-저장소-주소" target="_blank" class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+                </div>
+            </div>
+
+            <!-- ===== 프로젝트 2 ===== -->
+            <div class="project-card reveal">
+                <div class="project-visual">
+                    <div class="project-visual-inner">
+                        <div class="project-visual-bar">
+                            <span class="project-visual-dot"></span>
+                            <span class="project-visual-dot"></span>
+                            <span class="project-visual-dot"></span>
+                        </div>
+                        <div class="project-visual-code">
+                            <span class="code-comment">// Project Two</span><br>
+                            <span class="code-keyword">function</span> <span class="code-func">Dashboard</span>() {<br> &nbsp;&nbsp;
+                            <span class="code-keyword">const</span> data = <span class="code-func">useData</span>();<br> &nbsp;&nbsp;
+                            <span class="code-keyword">const</span> stats = <span class="code-func">useStats</span>();<br> &nbsp;&nbsp;
+                            <span class="code-keyword">return</span> &lt;<span class="code-func">View</span> data={data} /&gt;<br> }
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-label">개인 프로젝트</span>
+                    <!-- 📌 종류 -->
+                    <h3 class="project-name">프로젝트 이름을 입력하세요</h3>
+                    <!-- 📌 이름 -->
+                    <p class="project-desc">
+                        <!-- 📌 설명 -->
+                        프로젝트에 대한 간단한 설명을 작성하세요. 어떤 기능을 구현했는지, 어떤 기술적 도전이 있었는지 적어보세요.
+                    </p>
+                    <div class="project-tech">
+                        <!-- 📌 기술 태그 -->
+                        <span>TypeScript</span>
+                        <span>Next.js</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <a href="https://github.com/여기에-저장소-주소" target="_blank" class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+                </div>
+            </div>
+
+            <!-- ===== 프로젝트 3 ===== -->
+            <!-- 📌 프로젝트가 2개뿐이면 이 블록 전체를 삭제하세요
+           📌 4개 이상 필요하면 이 블록을 복사해서 아래에 붙여넣으세요 -->
+            <div class="project-card reveal">
+                <div class="project-visual">
+                    <div class="project-visual-inner">
+                        <div class="project-visual-bar">
+                            <span class="project-visual-dot"></span>
+                            <span class="project-visual-dot"></span>
+                            <span class="project-visual-dot"></span>
+                        </div>
+                        <div class="project-visual-code">
+                            <span class="code-comment">// Project Three</span><br>
+                            <span class="code-keyword">async</span> <span class="code-keyword">function</span> <span class="code-func">getData</span>(id) {<br> &nbsp;&nbsp;
+                            <span class="code-keyword">const</span> res = <span class="code-keyword">await</span> <span class="code-func">fetch</span>(<br> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="code-string">`/api/data/${id}`</span><br> &nbsp;&nbsp;);
+                            <br> &nbsp;&nbsp;
+                            <span class="code-keyword">return</span> <span class="code-func">format</span>(res);<br> }
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-label">사이드 프로젝트</span>
+                    <!-- 📌 종류 -->
+                    <h3 class="project-name">프로젝트 이름을 입력하세요</h3>
+                    <!-- 📌 이름 -->
+                    <p class="project-desc">
+                        <!-- 📌 설명 -->
+                        프로젝트에 대한 간단한 설명을 작성하세요. 무엇을 만들었고, 어떤 점이 특별한지 소개해보세요.
+                    </p>
+                    <div class="project-tech">
+                        <!-- 📌 기술 태그 -->
+                        <span>Vue.js</span>
+                        <span>Express</span>
+                        <span>REST API</span>
+                    </div>
+                    <a href="https://github.com/여기에-저장소-주소" target="_blank" class="project-link">
+            View Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ============================================
+    📌 [수정] Footer — 하단 영역
+    - footer-links: 외부 링크를 본인 주소로 변경하세요
+  ============================================= -->
+    <footer>
+        <div class="footer-left">© 2026 — Designed & Built with passion</div>
+        <div class="footer-links">
+            <a href="https://github.com/sikumdev" target="_blank">GitHub</a>
+            <!-- 📌 GitHub -->
+            <a href="mailto:sikumdev@gmail.com">Email</a>
+            <!-- 📌 이메일 -->
+            <!-- <a href="https://linkedin.com/in/여기에-본인-아이디" target="_blank">LinkedIn</a>
+             📌 LinkedIn -->
+            <!-- 📌 [선택] 블로그 등 추가:
+           <a href="https://velog.io/@아이디" target="_blank">Blog</a> -->
+        </div>
+    </footer>
+
+
+    <!-- ⚙️ JavaScript (변경 불필요) -->
+    <script>
+        // 마우스 글로우
+        const glow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // 스크롤 시 네비게이션 축소
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // 모바일 메뉴
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('open');
+        }
+
+        // 스크롤 등장 애니메이션
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        reveals.forEach(el => observer.observe(el));
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
