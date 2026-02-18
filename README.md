@@ -1,7 +1,8 @@
 # Portfolio
 
 ## Skills
+- python
+- PostgreSQL
 - n8n
-- SQL
 - CLI
 - Git
